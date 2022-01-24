@@ -1,4 +1,5 @@
 from __future__ import annotations
+from abc import abstractmethod, ABC
 
 from enum import Enum
 
@@ -6,7 +7,7 @@ class SkillType(Enum):
     Physic = 0
     Magic = 1
         
-class Skill:
+class Skill(ABC):
     def __init__(self, skill_type:SkillType=None) -> None:
         self._skill_type = skill_type
     
@@ -17,9 +18,10 @@ class Skill:
     @skill_type.setter
     def skill_type(self, value):
         self._skill_type = value
-        
+    
+    @abstractmethod
     def attack(self, attacker:Hero, target:Hero):
-        return NotImplementedError
+        """Implemented Attack"""
     
 
 class Attribute:

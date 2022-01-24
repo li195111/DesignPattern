@@ -2,6 +2,12 @@ from __future__ import annotations
 
 from models import SkillType, Skill, Hero
 
+class FireBall(Skill):
+    def __init__(self, skill_type: SkillType = SkillType.Magic) -> None:
+        super().__init__(skill_type)
+        
+# FireBall() # Will Raise TypeError, No Implemented 'attack' method
+
 class Collide(Skill):
     def __init__(self, skill_type: SkillType=SkillType.Physic) -> None:
         super().__init__(skill_type)
