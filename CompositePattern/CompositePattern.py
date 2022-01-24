@@ -17,10 +17,14 @@ class CompositeProduct(Product):
     def __init__(self, price=0) -> None:
         super().__init__(price)
         self._additional_price = 0
-        self.child_products:List[CompositeProduct] = []
+        self.child_products:List[Product] = []
         
-    def add(self, product:CompositeProduct):
+    def add(self, product:Product):
         self.child_products.append(product)
+        
+    def remove(self, product:Product):
+        if product in self.child_products:
+            self.child_products.remove(product)
         
     @property
     def price(self):
@@ -65,3 +69,9 @@ if __name__ == "__main__":
     print (f"Box 2 Price {box2.price}")
     print (f"A Price {a.price}")
     print (f"Box 1 Price {box.price}")
+    
+    a.remove(c2)
+    print (f"Box 2 Price {box2.price}")
+    print (f"A Price {a.price}")
+    print (f"Box 1 Price {box.price}")
+    
