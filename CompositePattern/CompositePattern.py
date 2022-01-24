@@ -4,10 +4,22 @@ from typing import List
 class Product:
     def __init__(self, price=0) -> None:
         self._orignal_price = price
-        self._additional_price = 0
-        self.child_products:List[Product] = []
         
-    def add(self, product:Product):
+    @property
+    def price(self):
+        return self._orignal_price
+    
+    @price.setter
+    def price(self, value):
+        self._orignal_price = max(value,0)
+        
+class CompositeProduct(Product):
+    def __init__(self, price=0) -> None:
+        super().__init__(price)
+        self._additional_price = 0
+        self.child_products:List[CompositeProduct] = []
+        
+    def add(self, product:CompositeProduct):
         self.child_products.append(product)
         
     @property
@@ -15,11 +27,7 @@ class Product:
         self._additional_price = sum([p.price for p in self.child_products])
         return self._orignal_price + self._additional_price
     
-    @price.setter
-    def price(self, value):
-        self._orignal_price = max(value,0)
-
-class ProductA(Product):
+class ProductA(CompositeProduct):
     def __init__(self, price=0) -> None:
         super().__init__(price)
         
@@ -31,7 +39,7 @@ class ProductC(Product):
     def __init__(self, price=0) -> None:
         super().__init__(price)
         
-class Box(Product):
+class Box(CompositeProduct):
     def __init__(self, price=0) -> None:
         super().__init__(price)
         
