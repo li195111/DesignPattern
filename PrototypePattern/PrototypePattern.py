@@ -33,7 +33,7 @@ class Person(IPerson):
     
     def copy(self):
         return copy.deepcopy(self)
-                       
+
 if __name__ == "__main__":
     
     A = Person("Gary", 18)
