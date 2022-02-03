@@ -2,3 +2,4 @@
 __pycache__
 *.drawio.dtmp
 .vscode/
+.DS_Store
